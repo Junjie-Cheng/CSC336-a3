@@ -6,6 +6,7 @@ function Question1a(~)
 	for k = 1:10
 		gam = 10 ^ (- 2*k);
 		%A = [gam -1+gam; 2 1];
+		
 		L = [1 0; 2/gam 1];
 		U = [gam -1+gam ;0 -1+2/gam];
 

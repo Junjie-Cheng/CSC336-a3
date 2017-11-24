@@ -1,0 +1,141 @@
+Question1a.m
+function Question1a(~)
+    warning('off');
+	b = [1 1]';
+	x = [1 -1]';
+	fprintf('%s\t\t%s\t%s\n', 'gamma', 'error(1)', 'error(2)');
+	for k = 1:10
+		gam = 10 ^ (- 2*k);
+		%A = [gam -1+gam; 2 1];
+		
+		L = [1 0; 2/gam 1];
+		U = [gam -1+gam ;0 -1+2/gam];
+
+		y = L\b;
+		hat_x= U\y;
+
+		err = hat_x - x;  
+
+		fprintf('%e\t%e\t%e\n', gam, err(1), err(2));
+	end
+end
+
+Question1b.m
+function Question1b(~)
+	b = [1 1]';
+	x = [1 -1]';
+	P = [0 1; 1 0];
+	tilde_b = P*b;
+	fprintf('%s\t\t%s\t%s\n', 'gamma', 'error(1)', 'error(2)');
+	for k = 1:10
+		gam = 10 ^ (- 2*k);
+		%A = [gam -1+gam; 2 1];
+		L = [1 0; gam/2 1];
+		U = [2 1; 0 -1+gam/2];
+
+		y = L\tilde_b;
+		hat_x= U\y;
+
+		err = hat_x - x;  
+
+		fprintf('%e\t%e\t%e\n', gam, err(1), err(2));
+	end
+end
+
+Question1c.m
+function Question1c(~)
+	b = [1 1]';
+	x = [1 -1]';
+	fprintf('%s\t\t%s\t%s\n', 'gamma', 'error(1)', 'error(2)');
+	for k = 1:10
+		gam = 10 ^ (- 2*k);
+		A = [gam -1+gam; 2 1];
+		L = [1 0; 2/gam 1];
+		U = [gam -1+gam ;0 -1+2/gam];
+
+		y = L\b;
+		hat_x= U\y;
+
+		r = b - A*hat_x;
+
+		z = L\r;
+		e = U\z;
+		tilde_x = hat_x + e;
+
+		err = tilde_x - x;  
+
+		fprintf('%e\t%e\t%e\n', gam, err(1), err(2));
+	end
+end
+
+
+
+Question2c.m
+function Question2c(~)
+	n = 60;
+	A = ones(n,n);
+	A = A - triu(A);
+	A = eye(n) - A;
+	A = A + [ones(n-1,1); 0] * [zeros(1,n-1), 1];
+
+	Q = diag(ones(n-1,1),1);
+	Q(n,1) = 1;
+
+	[L1, U1, P1] = lu(A);
+
+	[L2, U2] = lu(A*Q);
+
+	fprintf('%s %d.\n', 'The element with largest absolute value in U2 is', max(max(abs(U2))));
+
+	x = ones(n,1);
+	b = A*x;
+
+	y = L1\b;
+	x1 = U1\y;
+
+	fprintf('%s %d\n', 'norm(x-x1, inf) =', norm(x-x1, inf));
+	y = L2\b;
+	z = U2\y;
+	x2 = Q * z;
+	fprintf('%s %d\n', 'norm(x-x2, inf) =', norm(x-x2, inf));
+
+end
+
+
+
+Question4.m
+function Question4(~)
+    p = [3 5 9 4 10 8 7 9 10];
+    x = [1:10]';
+
+    y1 = perm_a(p,x)
+    q = perm_b(p)
+    y2 = perm_c(q,x)
+end
+
+perm_a.m
+function y = perm_a(p, x)
+    n = length(x);
+    y = x;
+    for i = 1:n-1
+        y([i p(i)]) = y([p(i) i]);
+   	end
+end
+
+perm_b.m
+function q = perm_b(p)
+    n = length(p) + 1;
+    q = 1:n;
+    for i = 1:n-1
+        q([i p(i)]) = q([p(i) i]);
+    end
+end
+
+perm_c.m
+function y = perm_c(q,x)
+    n = length(q);
+    y = zeros(n,1);
+    for i = 1:n
+        y(i) = x(q(i));
+    end
+end
