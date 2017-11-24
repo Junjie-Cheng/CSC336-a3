@@ -1,5 +1,10 @@
+Junjie Cheng
+1002770539
+UTORid: chenjunj
+
+Output and answers for Q1, Q2c, Q4:
 >> Question1a
-gamma			error(1)		error(2)
+gamma		error(1)		error(2)
 1.000000e-02	8.881784e-16	0.000000e+00
 1.000000e-04	-1.101341e-13	0.000000e+00
 1.000000e-06	2.875566e-11	0.000000e+00
@@ -11,13 +16,15 @@ gamma			error(1)		error(2)
 1.000000e-18	-1.000000e+00	0.000000e+00
 1.000000e-20	-1.000000e+00	0.000000e+00
 
-The error of the first component is increasing as gamma approaches zero.
+
+The error of the first component is increasing as gamma approaches zero, until the error gets to -1.
 The error of the second component is always 0, regardless of the value of gamma.
 
-The computed solution becomes more inaccurate as the absolute value of gamma decreases.
+The computed solution becomes more inaccurate as the absolute value of gamma decreases, until the error of the first component gets to -1. At this time, the computed solution is very inaccurate, as the absolute value of the relative error is 1 if we choose infinity-norm. After this stage, the accuracy will not drop further when gamma decreases.
+
 
 >> Question1b
-gamma			error(1)		error(2)
+gamma		error(1)		error(2)
 1.000000e-02	0.000000e+00	0.000000e+00
 1.000000e-04	0.000000e+00	0.000000e+00
 1.000000e-06	0.000000e+00	0.000000e+00
@@ -28,8 +35,15 @@ gamma			error(1)		error(2)
 1.000000e-16	0.000000e+00	0.000000e+00
 1.000000e-18	0.000000e+00	0.000000e+00
 1.000000e-20	0.000000e+00	0.000000e+00
+
+
+The computed solution is very accurate. The relative error of x is always 0 for gamma as small as 10^(-20). The accuracy is not changed when the absolute value of gamma decreases.
+
+Pivoting avoids the rounding errors caused by extremely small leading digonal entry, making the computed solution much more accurate.
+
+
 >> Question1c
-gamma			error(1)		error(2)
+gamma		error(1)		error(2)
 1.000000e-02	0.000000e+00	0.000000e+00
 1.000000e-04	0.000000e+00	0.000000e+00
 1.000000e-06	0.000000e+00	0.000000e+00
@@ -40,11 +54,23 @@ gamma			error(1)		error(2)
 1.000000e-16	0.000000e+00	0.000000e+00
 1.000000e-18	0.000000e+00	0.000000e+00
 1.000000e-20	0.000000e+00	0.000000e+00
+
+The "better" approximate solution is also accurate. The relative error of x is always 0 for gamma as small as 10^(-20). The accuracy is not changed when the absolute value of gamma decreases.
+
+The iterative refinement is very effective in this context. It can recover the full accuracy for badly scaled systems by repeatedly reducing the residue.
+
 
 >> Question2c
 The element with largest absolute value in U2 is 2.
 norm(x-x1, inf) = 1
 norm(x-x2, inf) = 0
+
+
+Using infinity-norm, the relative error of the poor approximation x1 is 1, which means some entry of x1 is 100% deviated from the exact solution.
+
+The relative error of the good approximation x2 is 0, which means all entry are exact (i.e. same as the exace solution). 
+x2 corrects all inaccurate entries in x1.
+
 
 >> Question4
 
@@ -61,11 +87,9 @@ y1 =
      2
      6
 
-
 q =
 
      3     5     9     4    10     8     7     1     2     6
-
 
 y2 =
 
