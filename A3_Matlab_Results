@@ -1,5 +1,5 @@
 >> Question1a
-gamma			error(1)	error(2)
+gamma			error(1)		error(2)
 1.000000e-02	8.881784e-16	0.000000e+00
 1.000000e-04	-1.101341e-13	0.000000e+00
 1.000000e-06	2.875566e-11	0.000000e+00
@@ -10,8 +10,14 @@ gamma			error(1)	error(2)
 1.000000e-16	1.102230e-01	0.000000e+00
 1.000000e-18	-1.000000e+00	0.000000e+00
 1.000000e-20	-1.000000e+00	0.000000e+00
+
+The error of the first component is increasing as gamma approaches zero.
+The error of the second component is always 0, regardless of the value of gamma.
+
+The computed solution becomes more inaccurate as the absolute value of gamma decreases.
+
 >> Question1b
-gamma			error(1)	error(2)
+gamma			error(1)		error(2)
 1.000000e-02	0.000000e+00	0.000000e+00
 1.000000e-04	0.000000e+00	0.000000e+00
 1.000000e-06	0.000000e+00	0.000000e+00
@@ -23,7 +29,7 @@ gamma			error(1)	error(2)
 1.000000e-18	0.000000e+00	0.000000e+00
 1.000000e-20	0.000000e+00	0.000000e+00
 >> Question1c
-gamma			error(1)	error(2)
+gamma			error(1)		error(2)
 1.000000e-02	0.000000e+00	0.000000e+00
 1.000000e-04	0.000000e+00	0.000000e+00
 1.000000e-06	0.000000e+00	0.000000e+00
